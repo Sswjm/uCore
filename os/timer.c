@@ -22,3 +22,15 @@ void set_next_timer()
 	const uint64 timebase = CPU_FREQ / TICKS_PER_SEC;
 	set_timer(get_cycle() + timebase);
 }
+
+/// Get current time (ms)
+int get_time()
+{
+    uint64 cycle = get_cycle();
+    uint64 sec = cycle / CPU_FREQ;
+    uint64 usec = (cycle % CPU_FREQ) * 1000000 / CPU_FREQ;
+    
+    uint64 time = sec * 1000 + usec / 1000;
+
+    return (int)time;
+}
